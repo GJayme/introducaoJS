@@ -28,6 +28,7 @@ for (var i = 0; i < pacientes.length; i++){
         console.log("Peso invalalido!");
         tdImc.textContent = "Peso Inválido!";
         pesoValida = false;
+        paciente.classList.add("paciente-invalido");
     }
 
 
@@ -35,6 +36,7 @@ for (var i = 0; i < pacientes.length; i++){
         console.log("Altura invalalido!");
         tdImc.textContent = "Altura Inválido!";
         alturaValida = false;
+        paciente.classList.add("paciente-invalido");
     }
 
 
