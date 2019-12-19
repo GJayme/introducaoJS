@@ -9,6 +9,7 @@ botaoAdicionar.addEventListener("click", function(event){
     //Cria a tr e a td do paciente
     var pacienteTr = montaTr(paciente);
 
+    //Validação e mensagem de erro
     var erros = validaPaciente(paciente);
 
     if (erros.length >0){
