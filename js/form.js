@@ -12,9 +12,9 @@ botaoAdicionar.addEventListener("click", function(event){
     //Validação e mensagem de erro
     var erros = validaPaciente(paciente);
 
+    console.log(erros);
     if (erros.length >0){
-        var mensagemErro = document.querySelector("#mensagem-erro");
-        mensagemErro.textContent = erros;
+        exibeMensagensDeErro(erros);
         return;
     }
 
@@ -29,7 +29,20 @@ botaoAdicionar.addEventListener("click", function(event){
     tabela.appendChild(pacienteTr);
 
     form.reset();
+    var mensagensErro = document.querySelector("#mensagens-erro");
+    mensagensErro.innerHTML = ""; // limpa o form e limpa as msg de erro, quando acrescentamos valores validos
 });
+
+function exibeMensagensDeErro(erros){
+    var ul = document.querySelector("#mensagens-erro");
+    ul.innerHTML = ""; // Permite controlar o HTML interno
+
+    erros.forEach(function(erro){ // forEach percorre sem precisar colocar até o elemento final
+        var li = document.createElement("li");
+        li.textContent = erro;
+        ul.appendChild(li);
+    });
+}
 
 function obtemPacienteDoFormulario(form){
 
@@ -65,17 +78,33 @@ function montaTd(dado, classe){
     return td;
 }
 
-function validaPaciente(paciente){
+function validaPaciente(paciente){ //validação do paciente
 
     var erros = [];
+
+    if (paciente.nome.length == 0){ // validação feita de acordo com o tamanho dos input
+        erros.push("O nome não pode ser em branco.");
+    }
     
     if (!validaPeso (paciente.peso)){
-        erros.push("Peso é invalido");
+        erros.push("Peso é invalido.");
     } 
 
     if (!validaAltura (paciente.altura)){
-        erros.push("Altura é invalida");
-    } 
+        erros.push("Altura é invalida.");
+    }
+
+    if (paciente.gordura.length == 0 ){ // validação feita de acordo com o tamanho dos input
+        erros.push("A gordura não pode ser em branco.");
+    }
+
+    if (paciente.peso.length == 0){ // validação feita de acordo com o tamanho dos input
+        erros.push("O peso não pode ser em branco.");
+    }
+
+    if (paciente.altura.length == 0){ // validação feita de acordo com o tamanho dos input
+        erros.push("A altura não pode ser em branco.");
+    }
 
     return erros;
 }
